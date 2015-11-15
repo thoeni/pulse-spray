@@ -1,7 +1,7 @@
 package utils
 
 import akka.actor.{ActorPath, ActorSelection, Props, ActorRef}
-import persistence.dal.{SurveysDalImpl, SurveysDal}
+import persistence.dal.{QuestionsDal, QuestionsDalImpl, SurveysDalImpl, SurveysDal}
 import slick.backend.DatabaseConfig
 import slick.driver.{JdbcProfile}
 
@@ -18,6 +18,7 @@ trait DbModule extends Profile{
 
 trait PersistenceModule {
 	val surveysDal: SurveysDal
+	val questionsDal: QuestionsDal
 }
 
 
@@ -32,6 +33,7 @@ trait PersistenceModuleImpl extends PersistenceModule with DbModule{
 	override implicit val db: JdbcProfile#Backend#Database = dbConfig.db
 
 	override val surveysDal = new SurveysDalImpl()
+	override val questionsDal = new QuestionsDalImpl()
 
 	val self = this
 

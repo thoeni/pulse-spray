@@ -1,12 +1,9 @@
 package persistence.entities
 
-import java.util.UUID
-
 import utils.Profile
 
 
 case class Survey(id: Option[String],name: String)
-
 case class SimpleSurvey(name: String)
 
 

@@ -1,13 +1,11 @@
 package rest
 
-import entities.JsonProtocol
+import entities.JsonProtocol._
 import persistence.entities.{SimpleSurvey, Survey}
-import spray.httpx.SprayJsonSupport
-import spray.http._
-import StatusCodes._
+import spray.http.StatusCodes._
+import spray.httpx.SprayJsonSupport._
+
 import scala.concurrent.Future
-import JsonProtocol._
-import SprayJsonSupport._
 
 class RoutesSpec  extends AbstractRestTest {
   sequential
@@ -17,6 +15,10 @@ class RoutesSpec  extends AbstractRestTest {
   val modules = new Modules {}
 
   val surveys = new SurveyHttpService(modules){
+    override def actorRefFactory = system
+  }
+
+  val questions = new QuestionHttpService(modules){
     override def actorRefFactory = system
   }
 

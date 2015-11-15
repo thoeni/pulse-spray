@@ -27,7 +27,7 @@ class SurveysDalImpl(implicit val db: JdbcProfile#Backend#Database,implicit val 
     )).mapTo[Int]
   }
 
-  override def getSurveyById(id: String) : Future[Vector[Survey]] = { db.run(surveys.filter(_.id === id).result).mapTo[Vector[Survey]] }
+  override def getSurveyById(id: String) = { db.run(surveys.filter(_.id === id).result).mapTo[Vector[Survey]] }
 
   override def createTables() : Future[Unit] = {
       db.run(DBIO.seq(surveys.schema.create))
